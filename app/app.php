@@ -52,14 +52,10 @@
             }
         }
 
-        if (empty($cars_matching_search))
+        foreach ($cars_matching_search as $match)
+        $output = "";
         {
-            echo '<h3>There are no cars that match your search</h3>';
-        }
-        else
-        {
-            $output = "";
-            foreach ($cars_matching_search as $match)
+            if (empty($cars_matching_search))
             {
                 $output = $output .
                 "
@@ -68,8 +64,26 @@
                 <head>
                     <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css'>
                     <title>Car Search Results</title>
-                    </head>
-                    <body>
+                </head>
+                <body>
+                    <div class='container'>
+                    <h2>No available cars match your search</h2>
+                    </div>
+                </body>
+                </html>
+                ";
+            }
+            else
+            {
+                $output = $output .
+                "
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css'>
+                    <title>Car Search Results</title>
+                </head>
+                <body>
                     <div class='container'>
                         <li><strong>" . $match->getModel() . "</strong></li>
                         <img src=" . $match->getPicture() . " class='img-rounded'>
@@ -78,7 +92,7 @@
                             <li>Miles: " . $match->getMiles() . "</li>
                         </ul>
                     </div>
-                    </body>
+                </body>
                 </html>
                 ";
             }

@@ -25,7 +25,7 @@
                          <label for='price'>Enter Maximum Mileage:</label>
                          <input id='max_miles' name='max_miles' class='form-control' type='number'>
                      </div>
-                     <button type='submit' class='btn-success'>Submit</button>
+                     <button type='submit' class='btn-default'>Search <span class='glyphicon glyphicon-search'></span></button>
                  </form>
              </div>
          </body>
@@ -54,24 +54,34 @@
 
         if (empty($cars_matching_search))
         {
-            echo "There are no cars that match your search";
+            echo '<h3>There are no cars that match your search</h3>';
         }
         else
         {
-        $output = "";
-        foreach ($cars_matching_search as $match)
-        {
-            $output = $output .
-            "<div class='row'>
-            <li>" . $match->getModel() . "</li>
-            <img src=" . $match->getPicture() . ">
-                <ul>
-                    <li>$" . $match->getPrice() . "</li>
-                    <li>Miles:" . $match->getMiles() . "</li>
-                </ul>
-                <br>
-                </div>";
-        }
+            $output = "";
+            foreach ($cars_matching_search as $match)
+            {
+                $output = $output .
+                "
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css'>
+                    <title>Car Search Results</title>
+                    </head>
+                    <body>
+                    <div class='container'>
+                        <li><strong>" . $match->getModel() . "</strong></li>
+                        <img src=" . $match->getPicture() . " class='img-rounded'>
+                        <ul>
+                            <li>$" . $match->getPrice() . "</li>
+                            <li>Miles: " . $match->getMiles() . "</li>
+                        </ul>
+                    </div>
+                    </body>
+                </html>
+                ";
+            }
         }
         return $output;
     });

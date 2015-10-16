@@ -60,5 +60,19 @@
             return $this->miles;
         }
 
+        function save()
+        {
+            array_push($_SESSION['car_lot'], $this);
+        }
+
+        static function getAll()
+        {
+            return $_SESSION['car_lot'];
+        }
+
+        static function deleteAll()
+        {
+            $_SESSION['car_lot'] = array();
+        }
     }
  ?>

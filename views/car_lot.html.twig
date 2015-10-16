@@ -1,0 +1,22 @@
+<html>
+<head>
+    <title>All the Cars</title>
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css'>
+</head>
+<body>
+    <div class='container'>
+        {% if autos is not empty %}
+        <h1>All the Cars Here:</h1>
+        {% for car in autos %}
+            <li><strong>{{ car.getModel }}</strong></li>
+            <img src='{{ car.getPicture }}' class='img-rounded'>
+            <ul>
+                <li>${{ car.getPrice }}</li>
+                <li>Miles: {{ car.getMiles }}</li>
+            </ul>
+            {% endif %}
+        {% endfor %}
+        <p><a href='/'>home</a></p>
+    </div>
+</body>
+</html>

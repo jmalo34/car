@@ -4,18 +4,23 @@
 
     session_start();
 
-    $porsche = new Car("2014 Porsche 911", "images/porsche.jpg", 114991, 7864);
-    $ford = new Car("2011 Ford F450", "images/ford.jpg", 55995, 14241);
-    $lexus = new Car("2013 Lexus RC 350", "images/lexus.jpg", 44700, 20000);
-    $mercedes = new Car ("Mercedes Benz CLS550", "images/mercedes.jpg", 39900, 37979);
-
-    $car_lot = array($porsche, $ford, $lexus, $mercedes);
-
-    $_SESSION['car_lot'] = array($car_lot);
+    if (empty($_SESSION['da_carz']))
+    {
+        $_SESSION['da_carz'] = array();
+    }
 
     $app = new Silex\Application();
 
     $app->register(new Silex\Provider\TwigServiceProvider(), array('twig.path' => __DIR__.'/../views'));
+
+    // $porsche = new Car("2014 Porsche 911", "images/porsche.jpg", 114991, 7864);
+    // $ford = new Car("2011 Ford F450", "images/ford.jpg", 55995, 14241);
+    // $lexus = new Car("2013 Lexus RC 350", "images/lexus.jpg", 44700, 20000);
+    // $mercedes = new Car ("Mercedes Benz CLS550", "images/mercedes.jpg", 39900, 37979);
+    //
+    // $car_lot = array($porsche, $ford, $lexus, $mercedes);
+    //
+    // array_push($_SESSION['da_carz'], $car_lot);
 
     $app->get("/", function() use ($app)
     {
@@ -32,7 +37,7 @@
 
     $app->get("/car_lot", function () use ($app)
     {
-        return $app['twig']->render('car_lot.html.twig', array('car_lot' => Car::getAll()));
+        return $app['twig']->render('car_lot.html.twig', array('autos' => Car::getAll()));
     });
 
     $app->post("/delete_cars", function () use ($app)

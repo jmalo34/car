@@ -7,15 +7,22 @@
     <div class='container'>
         {% if autos is not empty %}
         <h1>All the Cars Here:</h1>
-        {% for car in autos %}
-            <li><strong>{{ car.getModel }}</strong></li>
-            <img src='{{ car.getPicture }}' class='img-rounded'>
+        {% for auto in autos %}
+        <ul>
+            <li><strong>{{ auto.getModel }}</strong></li>
+            <img src='{{ auto.getPicture }}' class='img-rounded'>
             <ul>
-                <li>${{ car.getPrice }}</li>
-                <li>Miles: {{ car.getMiles }}</li>
+                <li>${{ auto.getPrice }}</li>
+                <li>Miles: {{ auto.getMiles }}</li>
             </ul>
-            {% endif %}
+        </ul>
         {% endfor %}
+        {% else %}
+            <p><em>There are no cars on the lot</p></em>
+        {% endif %}
+        <form action='delete_cars' method='post'>
+            <button type='submit'>clear the lot</button>
+        </form>
         <p><a href='/'>home</a></p>
     </div>
 </body>

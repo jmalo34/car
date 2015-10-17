@@ -62,17 +62,17 @@
 
         function save()
         {
-            array_push($_SESSION['car_lot'], $this);
+            array_push($_SESSION['da_carz'], $this);
         }
 
         static function getAll()
         {
-            return $_SESSION['car_lot'];
+            return $_SESSION['da_carz'];
         }
 
         static function deleteAll()
         {
-            $_SESSION['car_lot'] = array();
+            $_SESSION['da_carz'] = array();
         }
     }
  ?>

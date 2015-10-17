@@ -6,7 +6,8 @@
         private $price;
         private $miles;
 
-        function __construct($car_kind, $photo, $price_tag, $miles_onit = 120000)
+    //why are the default values not being applied to the cars i add to the lot via the form on homepage?
+        function __construct($car_kind, $photo = 'unavailable', $price_tag, $miles_onit = 120000)
         {
             $this->make_model = $car_kind;
             $this->picture = $photo;

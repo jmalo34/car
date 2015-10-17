@@ -5,13 +5,12 @@
 </head>
 <body>
     <div class='container'>
-        <h1>Car Search Results</h1>
+        <h1>Your Search results:</h1>
             {% if cars_matching_search is empty %}
                 <h2>No available cars match your search</h2>
                 <p><a href='/'>return to Home</a></p>
             {% else %}
             {% for match in cars_matching_search %}
-            <h3>Your Search results:</h3>
                 <li><strong>{{ match.getModel }}</strong></li>
                 <img src='{{ match.getPicture }}' class='img-rounded'>
                 <ul>

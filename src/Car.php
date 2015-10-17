@@ -20,7 +20,6 @@
             return ($max_price > $this->price && $max_miles > $this->miles);
         }
 
-
         function setModel($new_model)
         {
             $this->model = $new_model;
@@ -53,7 +52,11 @@
 
         function setMiles($new_miles)
         {
-            $this->miles = $new_miles;
+            $odometer = (integer) $new_miles;
+            if ($odometer != 0)
+            {
+                $this->miles = $odometer;
+            }
         }
 
         function getMiles()

@@ -29,6 +29,7 @@
     $app->post("/list_car", function () use ($app)
     {
         $new_car = new Car($_POST['make_model'], $_POST['picture'], $_POST['price'], $_POST['miles']);
+        //in order to get the default value to be applied, i had to remove "$POST['miles']" entirely. so, it seems as if there's nothing to detect whether it is a value of zero or not, and what to do if that is not okay. check
         $new_car->save();
 
         return $app['twig']->render('list_car.html.twig', array('list_car' => $new_car));
@@ -43,9 +44,19 @@
 
     $app->get("/match_cars", function () use ($app)
     {
-        $cars_matching_search = array(); Car::worthBuying($_GET[max_price], $_GET[max_miles]);
+        $cars = Car::getAll();
 
-        return $app['twig']->render('match_cars.html.twig', array('cars_matching_search' => $cars_matching_search, ));
+        $cars_matching_search = array();
+
+        foreach ($cars as $car)
+        {
+            if ($car->worthBuying($_GET['max_price'], $_GET['max_miles']))
+            {
+                array_push($cars_matching_search, $car);
+            }
+        }
+
+        return $app['twig']->render('match_cars.html.twig', array('cars_matching_search' => $cars_matching_search));
     });
 
     $app->post("/delete_cars", function () use ($app)

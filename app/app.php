@@ -17,10 +17,6 @@
 
     $app->register(new Silex\Provider\TwigServiceProvider(), array('twig.path' => __DIR__.'/../views'));
 
-    // $car_lot = array($porsche, $ford, $lexus, $mercedes);
-    //
-    // $_SESSION['da_carz'] = array($car_lot);
-
     $app->get("/", function() use ($app)
     {
         return $app['twig']->render('cars.html.twig');
@@ -31,6 +27,10 @@
         $new_car = new Car($_POST['make_model'], $_POST['picture'], $_POST['price'], $_POST['miles']);
         //in order to get the default value to be applied, i had to remove "$POST['miles']" entirely. so, it seems as if there's nothing to detect whether it is a value of zero or not, and what to do if that is not okay. check
         $new_car->save();
+
+        echo "<pre>";
+        print_r($new_car);
+        echo "</pre><br>";
 
         return $app['twig']->render('list_car.html.twig', array('list_car' => $new_car));
     });
@@ -55,6 +55,13 @@
                 array_push($cars_matching_search, $car);
             }
         }
+
+echo "<pre>";
+print_r($cars);
+echo "</pre><br>";
+echo "<pre>";
+print_r($cars_matching_search);
+echo "</pre><br>";
 
         return $app['twig']->render('match_cars.html.twig', array('cars_matching_search' => $cars_matching_search));
     });

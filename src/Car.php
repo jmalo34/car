@@ -10,7 +10,7 @@
         function __construct($car_kind, $photo = 'unavailable', $price_tag, $miles_onit = 120000)
         {
             $this->make_model = $car_kind;
-            $this->picture = $photo;
+            $this->picture  = $photo;
             $this->price = $price_tag;
             $this->miles = $miles_onit;
         }
